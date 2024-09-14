@@ -4,7 +4,7 @@ function findSem(lines, i) {
     // Check the current line for "sem a", "sem b", or "sem c"
     if (lines[i].includes("סמסטר א"))
       return "1:0:4";
-    else if(lines[i].includes("סמסטר א"))
+    else if(lines[i].includes("סמסטר ב"))
       return "2:0:4";
     else if(lines[i].includes("סמסטר קיץ")) {
       return "3:0:4";
@@ -44,15 +44,9 @@ function base64Encode(str) {
   return base64Str;
 }
 
-
-// Find every line that starts with "yet"
 let lines = document.documentElement.outerHTML.split('\n');
 for (let i = 0; i < lines.length; i++) {
-    //console.log(lines[i]);
 	if (lines[i].includes(' המחברת טרם נסרקה ') || lines[i].includes(' פרסום ')) {
-  //if (lines[i].includes('המחברת טרם נסרקה') || lines[i].includes('- המחברת טרם נסרקה -') || lines[i].includes('פורסם')) {
-    // Get the lines before "yet"
-    //console.log(lines[i]);
     let course = '', sem = '', date = '',moed = '';
     
     if (lines[i].includes('<td dir="ltr"><span class="hebText"')) {
@@ -66,33 +60,27 @@ for (let i = 0; i < lines.length; i++) {
       if (coNum) {  course = coNum[1]; }
     }
     if (i >= 1 && (lines[i-1].includes('סמסטר') || lines[i-1].includes('חריגה'))) {
-      line = lines[i-1];
+      let line = lines[i-1];
       reg1 = /סמסטר\s+(.)/; 
       sem = line.match(reg1);
-      if ((sem && sem[1] =="א") || lines[i-7].includes('סמסטר א') || lines[i+5].includes('סמסטר א')) { sem="1:0:1"; }
-      else if ((sem && sem[1] =="ב") || lines[i-7].includes('סמסטר ב') || lines[i+5].includes('סמסטר ב')) { sem="2:0:2"; }
-      else if (line.includes("חריגה")) 
-          sem = findSem(lines,i-1)
-      
+      if ((sem && sem[1] == "א") || lines[i - 7].includes('סמסטר א') || lines[i + 5].includes('סמסטר א')) { sem = "1:0:1"; }
+      else if ((sem && sem[1] == "ב") || lines[i - 7].includes('סמסטר ב') || lines[i + 5].includes('סמסטר ב')) { sem = "2:0:2"; }
+      else if (line.includes("חריגה")) {
+        sem = findSem(lines, i - 1)
+      }
       let reg2 = /.*class="hebText">(.+)<\/span><\/td>$/;
       let Rmoed = line.match(reg2);
      if (Rmoed && Rmoed[1] =="א'") { moed="1:1"; }
      else if (Rmoed && Rmoed[1] =="ב'") { moed="2:2"; }
      else if (line.includes("בוחן 1")) { moed="1:11"; sem = sem.substring(0, 4) + "4";;}
      else { moed="3:3" }
-    //console.log('date:', date, 'course:', course, 'sem:', sem);
     }
  
 
-    let encode= date+":"+sem+":"+course+":"+moed;
-    //console.log(encode);
+    let encode = date + ":" + sem + ":" + course + ":" + moed;
     encode="ex"+base64Encode(encode);
-    //console.log(encode);
-    //console.log(lines[i]);
-    //lines[i]=lines[i].replace('<span class="hebText">המחברת טרם נסרקה</span>','<input type="submit" name="'+encode+'=" value="קובץ המחברת" class="buttonSmallEntry">');
     lines[i]=lines[i].replace('<span class="hebText"> - המחברת טרם נסרקה -</span>','<input type="submit" name="'+encode+'=" value="קובץ המחברת" class="buttonSmallEntry">');
     lines[i]=lines[i].replace('<span class="hebText">המחברת נסרקה אבל תוצג אחרי פרסום ציון</span>','<input type="submit" name="'+encode+'=" value="קובץ המחברת" class="buttonSmallEntry">');
-//elementToModify.outerHTML = "xyz"+moed;
 }
 }
 
