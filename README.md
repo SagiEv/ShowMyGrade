@@ -9,8 +9,7 @@ install the extension via chrome://extensions\
 allow developer mode -> load unpacked -> choose the dir. you extracted\
 after that the extension installed (you can disable developer mode)\
 
-[![IMAGE ALT TEXT](http://img.youtube.com/vi/BU-xamqOOiQ/0.jpg)]([http://www.youtube.com/watch?v=BU-xamqOOiQ](https://www.youtube.com/watch?v=BU-xamqOOiQ) "משוך בגזר תוסף לסטודנטים בבן גוריון")
-
+[![משוך בגזר תוסף לסטודנטים בבן גוריון](https://img.youtube.com/vi/BU-xamqOOiQ/0.jpg)](https://www.youtube.com/watch?v=BU-xamqOOiQ)
 
 HOW TO USE
 -----------
