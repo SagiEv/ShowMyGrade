@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="popup.css">
+  <title>ShowMyGrade v1.6 by Sagi Evroni</title>
+  <style>
+    #startButton {
+      font-size: 24px;
+      padding: 10px 20px;
+    }
+
+    #buttonContainer {
+      display: flex;
+      justify-content: center;
+    }
+
+    img {
+      -drag: none;
+      user-select: none;
+      -moz-user-select: none;
+      -webkit-user-drag: none;
+      -webkit-user-select: none;
+      -khtml-user-select: none;
+      -ms-user-select: none;
+    }
+
+    iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+      transform: scale(0.8);
+      transform-origin: center;
+    }
+  </style>
+</head>
+<body>
+  <div id="button-container" style="text-align: center;">
+    <a href="https://gezer1.bgu.ac.il/meser/login.php" target="_blank">
+      <button id="enterGezer">Enter Gezer</button>
+    </a>
+  </div>
+    <a href="https://www.linkedin.com/in/sagi-evroni" target="_blank">
+      <img src="https://i.ibb.co/SPSJ2ys/icons8-linkedin-48.png" alt="LinkedIn Icon" id="linkedinIcon">
+    </a>
+    <a href="https://github.com/SagiEv" target="_blank">
+      <img src="https://i.ibb.co/jkzJZFd/github-git-icon-145985.png" alt="GitHub Icon" id="githubIcon">
+    </a>
+  
+  
+  <div id="status"></div>
+  <div id="counter"></div>
+
+  <div id="image-container">
+    <img id="bgu" src="https://i.ibb.co/yPHtMc8/shake-f-c-t.gif" alt="Shake Image">
+  </div>
+
+  <div id="buttonContainer" style="display:none;">
+    <button id="startButton">משוך בגזר</button>
+  </div>
+
+  <title>Settings</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            width: 300px;
+            padding: 20px;
+        }
+        .setting {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+            position: relative; /* For tooltip positioning */
+            overflow: visible; /* Ensures children like tooltip aren't clipped */
+        }
+        .setting span {
+            flex-grow: 1; /* Allows the title to take up remaining space */
+        }
+        .switch {
+            position: relative;
+            display: inline-block;
+            width: 40px;
+            height: 20px;
+            margin-left: 15px;
+        }
+        .switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ccc;
+            transition: .2s;
+            border-radius: 20px;
+        }
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 16px;
+            width: 16px;
+            left: 2px;
+            bottom: 2px;
+            background-color: white;
+            transition: .2s;
+            border-radius: 50%;
+        }
+        input:checked + .slider {
+            background-color: #2196F3;
+        }
+        input:checked + .slider:before {
+            transform: translateX(20px);
+        }
+        .info-icon {
+            margin-left: 10px;
+            cursor: pointer;
+            color: #2196F3;
+            position: relative; /* For tooltip positioning */
+        }
+        /* Tooltip styling */
+        .info-icon:hover .info-text {
+            display: block;
+        }
+
+        .info-text {
+            display: none; /* Initially hidden */
+            position: absolute;
+            bottom: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 200px; /* Adjust width as needed */
+            background-color: #f3581a;
+            color: #fff;
+            padding: 8px;
+            border-radius: 4px;
+            text-align: center;
+            font-size: 14px;
+            z-index: 1;
+            white-space: normal;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Tooltip arrow */
+        .info-text::after {
+            content: "";
+            position: absolute;
+            top: 100%; /* Position at the bottom of tooltip */
+            left: 50%;
+            transform: translateX(-50%);
+            border-width: 5px;
+            border-style: solid;
+            border-color: #333 transparent transparent transparent;
+        }
+    </style>
+</head>
+<body>
+    <h2>Settings:</h2>
+    <div class="setting">
+      <span>Show extension by default</span>
+      <div class="info-icon">ⓘ
+        <span class="info-text">
+            When enabled, the extension will be shown automatically when you logged-in to gezer.
+        </span>
+      </div>
+      <label class="switch">
+          <input type="checkbox" id="defaultToggle">
+          <span class="slider"></span>
+      </label>
+  </div>
+    <div class="setting">
+      <span>Show Last Grade Widget</span>
+      <label class="switch">
+          <input type="checkbox" id="lastGradeToggle">
+          <span class="slider"></span>
+      </label>
+  </div>
+  
+  <div class="setting">
+      <span>Show Exams Downloader Widget</span>
+      <label class="switch">
+          <input type="checkbox" id="examsDownloaderToggle">
+          <span class="slider"></span>
+      </label>
+  </div>
+  
+  <div class="setting">
+      <span>Show Average Widget</span>
+      <label class="switch">
+          <input type="checkbox" id="averageToggle">
+          <span class="slider"></span>
+      </label>
+  </div>
+
+
+  <!-- Link external popup.js for all event handlers -->
+  <script src="popup.js"></script>
+</body>
+</html>
+<!--
+/*
+  _________              .__  ___________                           .__ 
+ /   _____/____     ____ |__| \_   _____/__  _________  ____   ____ |__|
+ \_____  \\__  \   / ___\|  |  |    __)_\  \/ /\_  __ \/  _ \ /    \|  |
+ /        \/ __ \_/ /_/  >  |  |        \\   /  |  | \(  <_> )   |  \  |
+/_______  (____  /\___  /|__| /_______  / \_/   |__|   \____/|___|  /__|
+        \/     \//_____/              \/                          \/    
+_______________   ________  ________   __________  ________ ____ ___    
+\_____  \   _  \  \_____  \ \_____  \  \______   \/  _____/|    |   \   
+ /  ____/  /_\  \  /  ____/   _(__  <   |    |  _/   \  ___|    |   /   
+/       \  \_/   \/       \  /       \  |    |   \    \_\  \    |  /    
+\_______ \_____  /\_______ \/______  /  |______  /\______  /______/     
+        \/     \/         \/       \/          \/        \/             
+/*/
+-->

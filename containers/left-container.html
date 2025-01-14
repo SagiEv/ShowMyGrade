@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Latest Grade</title>
+
+</head>
+<body>
+    <div id="latestGradeContainer" class="latest-grade-container">
+        <h2 style="margin-bottom: 20px;">הציון האחרון שהתקבל:</h2>
+        <div id="gradeValue" class="grade-value"></div>
+        <div id="courseName" class="course-name"></div>
+        <div id="publishDate" class="publish-date"></div>
+    </div>
+
+    <script>
+        function isSameDay(dateToCheck) {
+            var currentDate = new Date();
+            return dateToCheck.getFullYear() === currentDate.getFullYear() &&
+                   dateToCheck.getMonth() === currentDate.getMonth() &&
+                   dateToCheck.getDate() === currentDate.getDate();
+        }
+
+        function updateLatestGrade(grade, courseName, publishDate) {
+            var container = document.getElementById('latestGradeContainer');
+            var gradeValueEl = document.getElementById('gradeValue');
+            var courseNameEl = document.getElementById('courseName');
+            var publishDateEl = document.getElementById('publishDate');
+
+            var publishDateObj = new Date(publishDate);
+            var isNew = isSameDay(publishDateObj);
+            console.log('isNew', isNew);
+            gradeValueEl.textContent = grade;
+            
+            if (isNew) {
+                gradeValueEl.innerHTML += ' <span class="new-label">NEW!</span>';
+                container.classList.add('new');
+            } else {
+                container.classList.remove('new');
+            }
+
+            courseNameEl.textContent = courseName;
+            publishDateEl.textContent = 'Published: ' + publishDateObj.toLocaleString();
+        }
+
+    </script>
+</body>
+</html>
