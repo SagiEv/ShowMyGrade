@@ -1,8 +1,9 @@
 # ShowMyGrade
 A chrome extention for BGU students that allows access to scanned exams which have not been published yet in the Gezer system
 -----------
+Available on Chrome Webstore: https://chromewebstore.google.com/detail/bgu-showmygrade/kbaoglpjpgdkmchclamikjjeklefkdlk
 
-INSTALLATION
+MANUAL INSTALLATION
 -------------
 unzip ShowMyGrade - chrome extension.zip file\
 install the extension via chrome://extensions\
